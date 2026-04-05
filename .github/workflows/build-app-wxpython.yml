@@ -5,7 +5,7 @@ on:
     paths-ignore:
       - 'docs/**'
   workflow_dispatch:
-  release:
+  release: 
     types: [published]
 
 jobs:
