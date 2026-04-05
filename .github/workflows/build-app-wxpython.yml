@@ -1,4 +1,4 @@
-name: unblock tahore
+name: CI - Build wxPython
 
 on:
   push:
