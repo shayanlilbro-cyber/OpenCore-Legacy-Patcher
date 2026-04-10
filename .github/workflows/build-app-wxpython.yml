@@ -3,7 +3,6 @@ name: CI - Build wxPython
 on:
  release:
     types: [published]
-
 jobs:
   build:
     name: Build ;;
@@ -130,3 +129,4 @@ jobs:
 
  
   
+
