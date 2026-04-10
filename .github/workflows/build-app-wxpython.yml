@@ -126,8 +126,19 @@ jobs:
           file: ./dist/OpenCore-Patcher-Uninstaller.pkg
           tag: ${{ github.ref }}
           file_glob: true
-    
-      
+      - name: Setup Python dependencies
+  run: |
+    python3 -m pip install --upgrade pip
+    python3 -m pip install packaging
+      - name: Install dependencies
+  run: |
+    python3 -m pip install --upgrade pip
+    python3 -m pip install -r requirements.txt
+    python3 -m pip install packaging
+     - name: Install CI dependencies
+  run: |
+    python3 -m pip install --upgrade pip setuptools wheel
+    python3 -m pip install packaging wxPython pyobjc
   
 
  
