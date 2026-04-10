@@ -2,7 +2,9 @@ name: CI - Build wxPython
 
 on:
  push:
-  release:
+  paths-ignore:
+      - 'docs/**'
+  workflow_dispatch:
     types: [published]
 jobs:
   build:
