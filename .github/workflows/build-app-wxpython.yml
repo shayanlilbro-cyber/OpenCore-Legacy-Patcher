@@ -2,9 +2,7 @@ name: CI - Build wxPython
 
 on:
   push:
-    paths-ignore:
-      
-  workflow_dispatch:
+workflow_dispatch:
   release:
     types: [published]
 
@@ -128,3 +126,6 @@ jobs:
           file: ./dist/OpenCore-Patcher-Uninstaller.pkg
           tag: ${{ github.ref }}
           file_glob: true
+    
+      
+  
