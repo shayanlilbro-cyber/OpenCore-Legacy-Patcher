@@ -36,7 +36,15 @@ jobs:
       ORG_MAC_NOTARIZATION_PASSWORD: ${{ secrets.ORG_MAC_NOTARIZATION_PASSWORD }}
 
     steps:
-      - uses: actions/checkout@v4
+        - uses: actions/checkout@v4
+         - name: Set up Python
+          uses: actions/setup-python@v4
+    with:
+      python-version: '3.11'
+
+  - name: Install missing module
+    run: pip install packaging
+      
 
       # - name: Import Application Signing Certificate
       #   uses: dhinakg/import-codesign-certs@master
