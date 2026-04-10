@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build ;;
-    runs-on: x86_64_latest
+    runs-on: x86_64_monterey
     
 
     env:
