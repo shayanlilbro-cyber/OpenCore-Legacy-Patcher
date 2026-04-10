@@ -2,8 +2,7 @@ name: CI - Build wxPython
 
 on:
   push:
-workflow_dispatch:
-  release:
+ release:
     types: [published]
 
 jobs:
@@ -129,3 +128,5 @@ jobs:
     
       
   
+
+ 
