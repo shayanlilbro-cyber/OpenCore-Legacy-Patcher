@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   release:
     types: [published]
-   if: github.repository_owner == 'shayanlilbro-cyber'
+   
 jobs:
   build:
     name: Build wxPython
