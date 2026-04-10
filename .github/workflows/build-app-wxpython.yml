@@ -1,7 +1,8 @@
 name: CI - Build wxPython
 
 on:
- release:
+ push:
+  release:
     types: [published]
 jobs:
   build:
