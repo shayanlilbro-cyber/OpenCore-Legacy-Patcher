@@ -38,7 +38,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install packaging pyobjc py_sip_xnu
+          python -m pip install packaging pyobjc py_sip_xnu wxPython
 
       - name: Prepare Assets (--prepare-assets)
         run: >
