@@ -2,49 +2,48 @@ name: Build OpenCore Legacy Patcher (Tahoe)
 
 on:
   push:
-    paths-ignore:
+      paths-ignore:
       - 'docs/**'
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: macos-14  # macOS Sonoma runner
+    runs-on: macos-14
 
     steps:
-      # Step 1: Check out the code
+      # 1. Checkout repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
+      # 2. Setup Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      # Step 3: Install dependencies
+      # 3. Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Make sure you have this file
+          pip install -r requirements.txt
 
-      # Step 4: Run the build script
+      # 4. Run build (IMPORTANT FIX HERE)
       - name: Run build script
         run: |
-          python build.py  # Use your actual build script here
+          cd OpenCore-Legacy-Patcher
+          python build.py
 
-      # Step 5: Create a dist folder if it doesn’t exist
+      # 5. Create artifact folder
       - name: Create dist folder
         run: mkdir -p dist
 
-      # Step 6: Move output files into dist
+      # 6. Collect output safely
       - name: Collect build output
         run: |
-          # Example: if your build outputs a file like 'OCLP.app' or a folder 'build'
-          cp -R OCLP.app dist/ 2>/dev/null || true
-          cp -R build dist/ 2>/dev/null || true
-          # Add more specific files or folders if needed
+          cp -R OpenCore-Legacy-Patcher/*.app dist/ 2>/dev/null || true
+          cp -R OpenCore-Legacy-Patcher/build dist/ 2>/dev/null || true
 
-      # Step 7: Upload the dist folder as an artifact
+      # 7. Upload artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
