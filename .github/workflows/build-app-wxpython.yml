@@ -15,4 +15,9 @@ jobs:
     env:
       branch: ${{ github.ref }}
       commiturl: ${{ github.event.head_commit.url }}${{ github.event.release.html_url }}
-      commitdate: ${{ github.event.head_commit.
+      commitdate: ${{ github.event.head_commit.timestamp }}${{ github.event.release.published_at }}
+
+      ANALYTICS_KEY: ${{ secrets.ANALYTICS_KEY }}
+      ANALYTICS_SITE: ${{ secrets.ANALYTICS_SITE }}
+
+      ORG_MAC_DEVELOPER_ID_APPLICATION_IDENTITY:
