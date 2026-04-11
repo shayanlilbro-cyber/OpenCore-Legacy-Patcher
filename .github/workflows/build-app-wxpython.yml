@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14  # Use macOS Sonoma runner
+    runs-on: macos-14  # macOS Sonoma runner
 
     steps:
       # Step 1: Check out the code
@@ -18,30 +18,30 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'  # Use Python 3.11 (adjust if needed)
+          python-version: '3.11'
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Ensure you have a requirements.txt
+          pip install -r requirements.txt  # Make sure you have this file
 
-      # Step 4: Build OpenCore Legacy Patcher
+      # Step 4: Run the build script
       - name: Run build script
         run: |
-          python main.py  # Adjust if your build script is different
+          python build.py  # Use your actual build script here
 
-      # Step 5: Create a dist folder if not created
+      # Step 5: Create a dist folder if it doesn’t exist
       - name: Create dist folder
         run: mkdir -p dist
 
-      # Step 6: Move output files into dist folder
+      # Step 6: Move output files into dist
       - name: Collect build output
         run: |
-          # Copy only specific build artifacts to avoid recursion
-          cp -R *.app dist/ 2>/dev/null || true
+          # Example: if your build outputs a file like 'OCLP.app' or a folder 'build'
+          cp -R OCLP.app dist/ 2>/dev/null || true
           cp -R build dist/ 2>/dev/null || true
-          # Add any other specific directories or files if needed
+          # Add more specific files or folders if needed
 
       # Step 7: Upload the dist folder as an artifact
       - name: Upload Artifact
