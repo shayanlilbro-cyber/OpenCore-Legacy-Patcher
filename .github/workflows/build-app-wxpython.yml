@@ -9,20 +9,21 @@ jobs:
     runs-on: macos-14
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 🔍 FIND THE REAL FILE LOCATION
-      - name: Locate build script
+      - name: Run build script
         run: |
-          find . -name "build.py"
-          find . -name "*.py" | head -30
+          # Adjust this path after confirming file location
+          python build.py  # Or correct path after checking your structure
+      
