@@ -38,7 +38,10 @@ jobs:
       # Step 6: Move output files into dist folder
       - name: Collect build output
         run: |
-          cp -R * dist/ || true  # Adjust if specific files are needed
+          # Copy only specific build artifacts to avoid recursion
+          cp -R *.app dist/ 2>/dev/null || true
+          cp -R build dist/ 2>/dev/null || true
+          # Add any other specific directories or files if needed
 
       # Step 7: Upload the dist folder as an artifact
       - name: Upload Artifact
@@ -46,3 +49,4 @@ jobs:
         with:
           name: OCLP-Tahoe-Build
           path: dist/
+   
