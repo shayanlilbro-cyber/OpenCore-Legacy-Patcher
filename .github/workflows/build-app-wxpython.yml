@@ -34,15 +34,16 @@ jobs:
       ORG_MAC_NOTARIZATION_PASSWORD: ${{ secrets.ORG_MAC_NOTARIZATION_PASSWORD }}
        steps:
       - uses: actions/checkout@v4
-       - name: Set up Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: "3.11"
-.      - name: Prepare Assets (--prepare-assets)
-    run: |
-      python3 Build-Project.command --run-as-individual-steps --reset-dmg-cache --prepare-assets
-              steps:
-      - uses: actions/checkout@v4
+     - name: Set up Python
+  uses: actions/setup-python@v5
+  with:
+    python-version: "3.11"
+
+- name: Install Python dependencies
+  run: |
+    python -m pip install --upgrade pip setuptools wheel
+    python -m pip install packaging
+.     
       python3 -m pip install --upgrade pip setuptools wheel
       python3 -m pip install packaging
       # - name: Import Application Signing Certificate
