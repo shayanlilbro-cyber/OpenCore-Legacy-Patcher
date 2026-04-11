@@ -2,7 +2,7 @@ name: Build OpenCore Legacy Patcher (Tahoe)
 
 on:
   push:
-   workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
   build:
@@ -15,15 +15,4 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run build script
-        run: |
-          # Adjust this path after confirming file location
-          python build.py  # Or correct path after checking your structure
-      
+          python-
