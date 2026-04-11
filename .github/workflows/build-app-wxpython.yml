@@ -21,3 +21,49 @@ jobs:
       ANALYTICS_SITE: ${{ secrets.ANALYTICS_SITE }}
 
       ORG_MAC_DEVELOPER_ID_APPLICATION_IDENTITY:
+
+Invalid workflow file: .github/workflows/build-app-wxpython.yml#L1
+No steps defined in steps and no workflow called in uses for the following jobs: build
+
+Ah, I see what’s happening! The issue is that the steps section isn’t properly defined yet in your workflow. Let me give you the full, corrected workflow from start to finish, with all steps properly defined:
+
+name: CI - Build wxPython
+
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+  workflow_dispatch:
+    types: [published]
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-14
+
+    env:
+      branch: ${{ github.ref }}
+      commiturl: ${{ github.event.head_commit.url }}${{ github.event.release.html_url }}
+      commitdate: ${{ github.event.head_commit.timestamp }}${{ github.event.release.published_at }}
+
+      ANALYTICS_KEY: ${{ secrets.ANALYTICS_KEY }}
+      ANALYTICS_SITE: ${{ secrets.ANALYTICS_SITE }}
+
+      ORG_MAC_DEVELOPER_ID_APPLICATION_IDENTITY: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_IDENTITY }}
+      ORG_MAC_DEVELOPER_ID_INSTALLER_IDENTITY: ${{ secrets.ORG_MAC_DEVELOPER_ID_INSTALLER_IDENTITY }}
+
+      ORG_MAC_NOTARIZATION_TEAM_ID: ${{ secrets.ORG_MAC_NOTARIZATION_TEAM_ID }}
+      ORG_MAC_NOTARIZATION_APPLE_ID: ${{ secrets.ORG_MAC_NOTARIZATION_APPLE_ID }}
+      ORG_MAC_NOTARIZATION_PASSWORD: ${{ secrets.ORG_MAC_NOTARIZATION_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m
