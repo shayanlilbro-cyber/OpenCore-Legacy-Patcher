@@ -41,7 +41,8 @@ jobs:
 .      - name: Prepare Assets (--prepare-assets)
     run: |
       python3 Build-Project.command --run-as-individual-steps --reset-dmg-cache --prepare-assets
-    
+              steps:
+      - uses: actions/checkout@v4
       python3 -m pip install --upgrade pip setuptools wheel
       python3 -m pip install packaging
       # - name: Import Application Signing Certificate
