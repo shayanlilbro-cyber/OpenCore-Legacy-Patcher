@@ -9,45 +9,20 @@ jobs:
     runs-on: macos-14
 
     steps:
-      # 1. Checkout repo
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2. Setup Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. 🔍 DEBUG STEP (IMPORTANT)
-      - name: Show repo structure
-        run: ls -R
-
-      # 5. Run build (WE WILL FIX AFTER DEBUG)
-      - name: Run build script
+      # 🔍 FIND THE REAL FILE LOCATION
+      - name: Locate build script
         run: |
-          echo "Fix path after checking ls output"
-          python build.py
-
-      # 6. Create dist folder
-      - name: Create dist folder
-        run: mkdir -p dist
-
-      # 7. Collect output safely
-      - name: Collect build output
-        run: |
-          cp -R *.app dist/ 2>/dev/null || true
-          cp -R build dist/ 2>/dev/null || true
-
-      # 8. Upload artifact
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: OCLP-Tahoe-Build
-          path: dist/
+          find . -name "build.py"
+          find . -name "*.py" | head -30
