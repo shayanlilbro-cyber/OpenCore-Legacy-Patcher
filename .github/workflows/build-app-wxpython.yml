@@ -127,3 +127,8 @@ jobs:
           file: ./dist/OpenCore-Patcher-Uninstaller.pkg
           tag: ${{ github.ref }}
           file_glob: true
+      - name: Upload Artifact
+  uses: actions/upload-artifact@v4
+  with:
+    name: OCLP-Build
+    path: dist/
