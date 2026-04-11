@@ -2,9 +2,7 @@ name: Build OpenCore Legacy Patcher (Tahoe)
 
 on:
   push:
-      paths-ignore:
-      - 'docs/**'
-  workflow_dispatch:
+   workflow_dispatch:
 
 jobs:
   build:
@@ -27,23 +25,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Run build (IMPORTANT FIX HERE)
+      # 4. 🔍 DEBUG STEP (IMPORTANT)
+      - name: Show repo structure
+        run: ls -R
+
+      # 5. Run build (WE WILL FIX AFTER DEBUG)
       - name: Run build script
         run: |
-          cd OpenCore-Legacy-Patcher
+          echo "Fix path after checking ls output"
           python build.py
 
-      # 5. Create artifact folder
+      # 6. Create dist folder
       - name: Create dist folder
         run: mkdir -p dist
 
-      # 6. Collect output safely
+      # 7. Collect output safely
       - name: Collect build output
         run: |
-          cp -R OpenCore-Legacy-Patcher/*.app dist/ 2>/dev/null || true
-          cp -R OpenCore-Legacy-Patcher/build dist/ 2>/dev/null || true
+          cp -R *.app dist/ 2>/dev/null || true
+          cp -R build dist/ 2>/dev/null || true
 
-      # 7. Upload artifact
+      # 8. Upload artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
