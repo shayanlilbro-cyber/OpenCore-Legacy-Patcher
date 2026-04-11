@@ -2,10 +2,10 @@ name: Build OpenCore Legacy Patcher (Tahoe)
 
 on:
   push:
-    branches: [ main ]
+x  paths-ignore:
+      - 'docs/**'
   workflow_dispatch:
-
-jobs:
+ jobs:
   build:
     runs-on: macos-14  # macOS Sonoma runner
 
@@ -49,3 +49,4 @@ jobs:
         with:
           name: OCLP-Tahoe-Build
           path: dist/
+
