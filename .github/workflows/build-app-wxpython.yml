@@ -2,7 +2,7 @@ name: Build OpenCore Legacy Patcher (Tahoe)
 
 on:
   push:
-    branches: [ main ]
+    
   workflow_dispatch:
 
 jobs:
