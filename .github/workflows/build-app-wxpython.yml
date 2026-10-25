@@ -2,7 +2,8 @@ name: Build OpenCore Legacy Patcher (Tahoe)
 
 on:
   push:
-    
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -16,7 +17,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -25,8 +26,24 @@ jobs:
 
       - name: List repository files
         run: |
-          ls -R  # This will print the full file structure for debugging
+          ls -R
 
       - name: Run build script
         run: |
-          python build.py  # Adjust this path after seeing the file structure
+          chmod +x Build-Project.command
+          ./Build-Project.command
+
+      - name: Create dist folder
+        run: mkdir -p dist
+
+      - name: Collect build output
+        run: |
+          cp -R *.app dist/ 2>/dev/null || true
+          cp -R payloads dist/ 2>/dev/null || true
+          cp -R build dist/ 2>/dev/null || true
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OCLP-Tahoe-Build
+          path: dist/
