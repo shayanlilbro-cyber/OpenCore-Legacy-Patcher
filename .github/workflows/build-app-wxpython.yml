@@ -7,42 +7,28 @@ on:
   workflow_dispatch:
   release:
     types: [published]
-   
+
 jobs:
   build:
     name: Build wxPython
     runs-on: macos-15-intel
-    
 
     env:
-      # GitHub Information
       branch: ${{ github.ref }}
       commiturl: ${{ github.event.head_commit.url }}${{ github.event.release.html_url }}
       commitdate: ${{ github.event.head_commit.timestamp }}${{ github.event.release.published_at }}
 
-      # Analytics
-      ANALYTICS_KEY: ${{ secrets.ANALYTICS_KEY }}
-      ANALYTICS_SITE: ${{ secrets.ANALYTICS_SITE }}
-
-      # App Signing
-      ORG_MAC_DEVELOPER_ID_APPLICATION_IDENTITY: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_IDENTITY }}
-
-      # PKG Signing
-      ORG_MAC_DEVELOPER_ID_INSTALLER_IDENTITY: ${{ secrets.ORG_MAC_DEVELOPER_ID_INSTALLER_IDENTITY }}
-
-      # Notarization
-      ORG_MAC_NOTARIZATION_TEAM_ID: ${{ secrets.ORG_MAC_NOTARIZATION_TEAM_ID }}
-      ORG_MAC_NOTARIZATION_APPLE_ID: ${{ secrets.ORG_MAC_NOTARIZATION_APPLE_ID }}
-      ORG_MAC_NOTARIZATION_PASSWORD: ${{ secrets.ORG_MAC_NOTARIZATION_PASSWORD }}
-
     steps:
-    
-       - name: Import Application Signing Certificate
-         uses: dhinakg/import-codesign-certs@master
+      - uses: actions/checkout@v4
+
       #   with:
       #     p12-file-base64: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_BASE64 }}
       #     p12-password: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_PASSWORD }}
 
       - uses: actions/checkout@v4
-
+      # - name: Import Application Signing Certificate
+      #   uses: dhinakg/import-codesign-certs@master
+      #   with:
+      #     p12-file-base64: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_BASE64 }}
+      #     p12-password: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_PASSWORD }}
        
